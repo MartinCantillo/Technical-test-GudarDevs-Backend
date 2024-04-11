@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using ModelsAdditionalField.AdditionalField;
 using ModelsContactType.ContactTyp;
 
-namespace ModelsContacts.Constacs
+namespace ModelsContacts.Contacs
 {
     // Model Contact
     public class Contact
@@ -22,6 +22,9 @@ namespace ModelsContacts.Constacs
         [ForeignKey("Id_ContactType ")]
         public int ContactType { get; set; }
 
+        [ForeignKey("Id_AdditionalField ")]
+        public int AdditionalField { get; set; }
+
 
         [Required]
         public string PhoneNumber { get; set; }
@@ -34,13 +37,14 @@ namespace ModelsContacts.Constacs
         {
 
         }
-        public Contact(string Name, int ContactType, string PhoneNumber, string Comments)
+        public Contact(string Name, int ContactType, string PhoneNumber, string Comments,int AdditionalField)
         {
 
             this.Name = Name;
             this.ContactType = ContactType;
             this.PhoneNumber = PhoneNumber;
             this.Comments = Comments;
+            this.AdditionalField = AdditionalField;
 
         }
     }

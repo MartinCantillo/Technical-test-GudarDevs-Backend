@@ -9,15 +9,18 @@ namespace ModelsAdditionalField.AdditionalField
         public AdditionalField()
         {
         }
-        public AdditionalField(string FieldName, string FieldType, int ContactId,int Id_ContactType )
+        public AdditionalField(string FieldName, string FieldType)
         {
             this.FieldName = FieldName;
-            this.ContactId= ContactId;
-            this.Id_ContactType= Id_ContactType;
+            this.FieldType = FieldType;
+
 
         }
 
-        public int Id { get; set; }
+        [Key]
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id_AdditionalField { get; set; }
 
         [Required]
         public string FieldName { get; set; }
@@ -25,12 +28,6 @@ namespace ModelsAdditionalField.AdditionalField
         [Required]
         public string FieldType { get; set; }
 
-        // Foreign key properties
-        [ForeignKey("Id_Contact ")]
-        public int ContactId { get; set; }
-
-        [ForeignKey("Id_ContactType ")]
-        public int Id_ContactType { get; set; }
 
 
     }

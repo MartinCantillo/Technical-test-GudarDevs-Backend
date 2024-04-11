@@ -1,7 +1,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using ModelsAdditionalField.AdditionalField;
-using ModelsContacts.Constacs;
+using ModelsContacts.Contacs;
 using ModelsContactType.ContactTyp;
 
 namespace DataDataContext.DataContext
