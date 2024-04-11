@@ -1,12 +1,22 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using ModelsContacts.Constacs;
-using ModelsContactType.ContactTyp;
+
 
 namespace ModelsAdditionalField.AdditionalField
 {
     public class AdditionalField
     {
+        public AdditionalField()
+        {
+        }
+        public AdditionalField(string FieldName, string FieldType, int ContactId,int Id_ContactType )
+        {
+            this.FieldName = FieldName;
+            this.ContactId= ContactId;
+            this.Id_ContactType= Id_ContactType;
+
+        }
+
         public int Id { get; set; }
 
         [Required]
@@ -18,11 +28,11 @@ namespace ModelsAdditionalField.AdditionalField
         // Foreign key properties
         [ForeignKey("Id_Contact ")]
         public int ContactId { get; set; }
-        public int ContactTypeId { get; set; }
 
-        // Navigation properties
-        public Contact Contact { get; set; }
-        public ContactType ContactType { get; set; }
+        [ForeignKey("Id_ContactType ")]
+        public int Id_ContactType { get; set; }
+
+
     }
 }
 

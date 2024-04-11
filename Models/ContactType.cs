@@ -7,10 +7,14 @@ namespace ModelsContactType.ContactTyp
 
     public class ContactType
     {
-      
+        public ContactType()
+        {
+
+
+        }
         public ContactType(string TypeName)
         {
-            
+
             this.TypeName = TypeName;
         }
 
@@ -22,7 +26,7 @@ namespace ModelsContactType.ContactTyp
 
 
         [Required]
-        public string TypeName { get; set; } 
+        public string TypeName { get; set; }
 
 
     }

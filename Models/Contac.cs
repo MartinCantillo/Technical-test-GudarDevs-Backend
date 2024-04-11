@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using ModelsAdditionalField.AdditionalField;
-using ModelsContactType.ContactTyp; 
+using ModelsContactType.ContactTyp;
 
 namespace ModelsContacts.Constacs // Namespace declaration
 {
@@ -30,6 +30,10 @@ namespace ModelsContacts.Constacs // Namespace declaration
 
 
         // Constructor for the Contact class
+        public Contact()
+        {
+
+        }
         public Contact(string Name, int ContactType, string PhoneNumber, string Comments)
         {
 
