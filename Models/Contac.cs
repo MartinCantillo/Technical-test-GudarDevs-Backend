@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using ModelsAdditionalField.AdditionalField;
 using ModelsContactType.ContactTyp;
 
-namespace ModelsContacts.Constacs // Namespace declaration
+namespace ModelsContacts.Constacs
 {
     // Model Contact
     public class Contact
