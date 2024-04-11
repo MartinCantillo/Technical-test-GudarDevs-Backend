@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using ModelsContacts.Constacs;
 using ModelsContactType.ContactTyp;
 
@@ -15,6 +16,7 @@ namespace ModelsAdditionalField.AdditionalField
         public string FieldType { get; set; }
 
         // Foreign key properties
+        [ForeignKey("Id_Contact ")]
         public int ContactId { get; set; }
         public int ContactTypeId { get; set; }
 
