@@ -14,7 +14,7 @@ namespace ServicesSContactType.SContactType
             this.DbContext = DbContext;
         }
 
-        public async Task Delete(int contactType)
+        public void Delete(int contactType)
         {
             if (contactType == 0)
             {
@@ -22,7 +22,7 @@ namespace ServicesSContactType.SContactType
             }
             else
             {
-                var _contactType = await GetById(contactType);
+                var _contactType = GetById(contactType);
                 try
                 {
                     if (_contactType != null)
@@ -42,11 +42,18 @@ namespace ServicesSContactType.SContactType
 
         public ICollection<ContactType> GetAll() => this.DbContext.ContactTypes.ToList();
 
-        public async Task<ContactType> GetById(int contactType)
+        public ContactType GetById(int contactType)
         {
-            return await this.DbContext.ContactTypes.FirstOrDefaultAsync(p => p.Id_ContactType == contactType);
-        }
+            if (contactType == 0 || contactType < 0)
+            {
+                throw new Exception("Please check the value");
 
+            }
+            else
+            {
+                return this.DbContext.ContactTypes.FirstOrDefault(p => p.Id_ContactType == contactType);
+            }
+        }
         public async Task Save(ContactType contactType)
         {
             if (contactType.TypeName == "")
@@ -69,7 +76,7 @@ namespace ServicesSContactType.SContactType
             }
         }
 
-        public async Task<ContactType> Update(int IdcontactType, ContactType ContactType)
+        public ContactType Update(int IdcontactType, ContactType ContactType)
         {
             if (IdcontactType == 0)
             {
@@ -77,7 +84,7 @@ namespace ServicesSContactType.SContactType
             }
             else
             {
-                var CFound = await GetById(IdcontactType);
+                var CFound = GetById(IdcontactType);
                 if (CFound == null)
                 {
                     throw new Exception("ContactType not found");
@@ -86,7 +93,7 @@ namespace ServicesSContactType.SContactType
                 {
                     CFound.TypeName = ContactType.TypeName;
                     //Save the changes 
-                    await this.DbContext.SaveChangesAsync();
+                    this.DbContext.SaveChanges();
                     return CFound;
                 }
             }

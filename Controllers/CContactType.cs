@@ -1,46 +1,45 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using ModelsContacts.Contacs;
-using RepositoriesIContact.IContact;
+using ModelsContactType.ContactTyp;
+using RepositoriesIContactType.IContactType;
 
-namespace ControllersContactController.ContactController
+namespace ControllersCContactType.CContactType
 {
     [Authorize]
     [ApiController]
     [Route("[controller]")]
-    public class CContactController : ControllerBase
+    public class CContactTypeController : ControllerBase
     {
-        public readonly IContact _IContact;
+        public readonly IContactType _IContactType;
 
-        public CContactController(IContact _IContact)
+        public CContactTypeController(IContactType _IContactType)
         {
-            this._IContact = _IContact;
+            this._IContactType = _IContactType;
         }
-        [HttpPost("/SaveContact")]
-        public IActionResult SaveContact(Contact contact)
+        [HttpPost("/SaveContactType")]
+        public IActionResult Save(ContactType contactType)
         {
-            if (contact.ContactType == 0 || contact.Comments == "" || contact.AdditionalField == 0
-            || contact.Name == "")
+            if (contactType.TypeName == "")
             {
-                return BadRequest("Please check the values ");
+                return BadRequest("Please check the value");
+
             }
             else
             {
                 try
                 {
-                    this._IContact.Save(contact);
+                    this._IContactType.Save(contactType);
                     return Ok();
                 }
-                catch (System.Exception)
+                catch (System.Exception e)
                 {
 
-                    return BadRequest("Server error");
+                    throw new Exception(e.Message);
                 }
             }
         }
-
-        [HttpDelete("DeleteContact")]
-        public IActionResult DeleteContact(int id)
+        [HttpDelete("DeleteContactType")]
+        public IActionResult Delete(int id)
         {
             if (id == 0)
             {
@@ -50,7 +49,7 @@ namespace ControllersContactController.ContactController
             {
                 try
                 {
-                    var found = this._IContact.GetById(id);
+                    var found = this._IContactType.GetById(id);
                     if (found == null)
                     {
                         return NotFound();
@@ -58,8 +57,8 @@ namespace ControllersContactController.ContactController
                     else
                     {
 
-                        this._IContact.Delete(id);
-                        return Ok("Contact was deleted satisfactorily");
+                        this._IContactType.Delete(id);
+                        return Ok("It was deleted satisfactorily");
                     }
                 }
                 catch (System.Exception e)
@@ -69,14 +68,14 @@ namespace ControllersContactController.ContactController
                 }
             }
         }
-        [HttpGet("GetAllContact")]
-        public ActionResult<Contact> GetAllContact()
+        [HttpGet("GetAllContactType")]
+        public ActionResult<ContactType> GetAll()
         {
-            return Ok(this._IContact.GetAll());
+            return Ok(this._IContactType.GetAll());
         }
 
-        [HttpGet("GetbyIdContact")]
-        public async Task<ActionResult<Contact>> GetbyIdContact(int id)
+        [HttpGet("GetbyIdContactType")]
+        public async Task<ActionResult<ContactType>> GetbyId(int id)
         {
             if (id == 0)
             {
@@ -86,7 +85,7 @@ namespace ControllersContactController.ContactController
             {
                 try
                 {
-                    var found = this._IContact.GetById(id);
+                    var found = this._IContactType.GetById(id);
                     if (found == null)
                     {
                         return NotFound("Contact Not Found");
@@ -102,36 +101,33 @@ namespace ControllersContactController.ContactController
                 }
             }
         }
-        [HttpPut("/UpdateContact/{id}")]
-        public IActionResult UpdateContact(int id, Contact contact)
+
+        [HttpPut("/UpdateContactType/{id}")]
+        public IActionResult Update(int id, ContactType contactType)
         {
-            if (id == 0 || contact.ContactType == 0 || contact.Comments == "" || contact.AdditionalField == 0 || contact.Name == "")
+            if (id == 0 || contactType.TypeName == "")
             {
                 return BadRequest("Please check  the values");
             }
             else
             {
-
-
                 try
                 {
-                    var found = this._IContact.GetById(id);
+                    var found = this._IContactType.GetById(id);
                     if (found == null)
                     {
                         return NotFound();
                     }
                     else
                     {
-
-
-                        this._IContact.Update(id, contact);
-                        return Ok("Contact was updated satisfactorily");
+                        this._IContactType.Update(id, contactType);
+                        return Ok("It was updated satisfactorily");
                     }
                 }
-                catch (System.Exception)
+                catch (System.Exception e)
                 {
 
-                    return BadRequest("Server error");
+                    return BadRequest(e.Message);
                 }
             }
         }

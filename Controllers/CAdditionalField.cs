@@ -8,7 +8,7 @@ using RepositoriesIAdditionalField.IAdditionalField;
 
 namespace ControllersCAdditionalField.CAdditionalField
 {
-    // [Authorize]
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class CAdditionalFieldController : ControllerBase
@@ -49,7 +49,7 @@ namespace ControllersCAdditionalField.CAdditionalField
         }
 
 
-        [HttpGet("GetbyId")]
+        [HttpGet("GetbyIdAdditionalField")]
         public async Task<ActionResult<AdditionalField>> GetbyId(int id)
         {
             if (id == 0)
@@ -76,7 +76,7 @@ namespace ControllersCAdditionalField.CAdditionalField
                 }
             }
         }
-        [HttpPut("/Update/{id}")]
+        [HttpPut("/UpdateAdditionalField/{id}")]
         public IActionResult Update(int id, AdditionalField additionalField)
         {
             if (id == 0 || additionalField.FieldName == "" || additionalField.FieldType == "")
@@ -107,7 +107,7 @@ namespace ControllersCAdditionalField.CAdditionalField
                 }
             }
         }
-        [HttpDelete("Delete")]
+        [HttpDelete("DeleteAdditionalField")]
         public IActionResult Delete(int id)
         {
             if (id == 0 || id == null)
