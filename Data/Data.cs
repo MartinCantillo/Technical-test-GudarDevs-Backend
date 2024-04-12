@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using ModelsAdditionalField.AdditionalField;
 using ModelsContacts.Contacs;
 using ModelsContactType.ContactTyp;
+using ModelsUsers.Users;
 
 namespace DataDataContext.DataContext
 {
@@ -15,6 +16,7 @@ namespace DataDataContext.DataContext
         public DbSet<ContactType> ContactTypes { get; set; }
         public DbSet<Contact> Contacts { set; get; }
         public DbSet<AdditionalField> AdditionalFields { set; get; }
+          public DbSet<User> Users { set; get; }
 
 
 
