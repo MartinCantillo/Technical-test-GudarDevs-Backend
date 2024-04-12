@@ -68,7 +68,16 @@ builder.Services.AddDbContext<DataContext>(options =>
 {
     options.UseMySQL("server=localhost;port=3306;database=bdtest;user=root");
 });
-
+//Config cors
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("NewPolicy", app =>
+    {
+        app.AllowAnyOrigin()
+        .AllowAnyHeader()
+        .AllowAnyMethod();
+    });
+});
 
 var app = builder.Build();
 
@@ -78,6 +87,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("NewPolicy");
 
 app.UseHttpsRedirection();
 app.UseAuthentication();
