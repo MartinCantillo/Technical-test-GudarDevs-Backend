@@ -3,7 +3,7 @@ using DataDataContext.DataContext;
 using ModelsContactType.ContactTyp;
 using RepositoriesIContactType.IContactType;
 
-namespace ServocesSContactType.SContactType
+namespace ServicesSContactType.SContactType
 {
     public class SContactType : IContactType
     {

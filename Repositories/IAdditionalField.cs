@@ -2,7 +2,7 @@ using ModelsAdditionalField.AdditionalField;
 
 namespace RepositoriesIAdditionalField.IAdditionalField
 {
-    public interface IAdditionalFieldRepository
+    public interface IAdditionalField
     {
         public Task Save(AdditionalField additionalField);
         public Task Delete(int additionalField);

@@ -1,8 +1,5 @@
 
-
-
 using ModelsContactType.ContactTyp;
-
 namespace RepositoriesIContactType.IContactType
 {
     public interface IContactType

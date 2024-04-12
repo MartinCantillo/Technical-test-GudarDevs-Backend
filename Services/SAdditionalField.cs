@@ -5,7 +5,7 @@ using RepositoriesIAdditionalField.IAdditionalField;
 
 namespace ServicesSAdditionalField.SAdditionalField
 {
-    public class SAdditionalField : IAdditionalFieldRepository
+    public class SAdditionalField : IAdditionalField
     {
         //dependency injection 
         private readonly DataContext DbContext;
