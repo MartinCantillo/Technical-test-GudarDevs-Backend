@@ -85,6 +85,8 @@ namespace ServocesSContactType.SContactType
                 else
                 {
                     CFound.TypeName = ContactType.TypeName;
+                    //Save the changes 
+                    await this.DbContext.SaveChangesAsync();
                     return CFound;
                 }
             }
