@@ -19,7 +19,7 @@ namespace ControllersContactController.ContactController
         [HttpPost("/SaveContact")]
         public IActionResult SaveContact(Contact contact)
         {
-            if (contact.ContactType == 0 || contact.Comments == "" || contact.AdditionalField1 == ""
+            if (contact.ContactType == "" || contact.Comments == "" || contact.AdditionalField1 == ""
             || contact.Name == "" || contact.AdditionalField2 == "" || contact.PhoneNumber == "")
             {
                 return BadRequest("Please check the values ");
@@ -106,7 +106,7 @@ namespace ControllersContactController.ContactController
         [HttpPut("/UpdateContact/{id}")]
 public IActionResult UpdateContact(int id, Contact contact)
 {
-    if (id == 0 || contact.ContactType == 0 || contact.Comments == "" || contact.AdditionalField1 == "" || contact.AdditionalField2 == "" || contact.Name == "")
+    if (id == 0 || contact.ContactType == "" || contact.Comments == "" || contact.AdditionalField1 == "" || contact.AdditionalField2 == "" || contact.Name == "")
     {
         return BadRequest("Please check the values");
     }

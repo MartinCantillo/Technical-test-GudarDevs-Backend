@@ -58,7 +58,7 @@ namespace ServicesSContact.SContact
 
         public async Task Save(Contact contact)
         {
-            if (contact.ContactType == 0 || contact.Comments == "" || contact.AdditionalField1 == ""
+            if (contact.ContactType == "" || contact.Comments == "" || contact.AdditionalField1 == ""
             || contact.Name == "" || contact.AdditionalField2 == "" || contact.PhoneNumber == "")
             {
                 throw new Exception("Please check the data ");

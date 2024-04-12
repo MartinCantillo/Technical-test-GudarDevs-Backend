@@ -16,7 +16,7 @@ namespace ModelsContacts.Contacs
         public string Name { get; set; }
 
         [Required]
-        public int ContactType { get; set; }
+        public string ContactType { get; set; }
 
 
 
@@ -36,7 +36,7 @@ namespace ModelsContacts.Contacs
 
         }
 
-        public Contact(string Name, int ContactType, string PhoneNumber, string Comments, string AdditionalField1, string AdditionalField2)
+        public Contact(string Name, string ContactType, string PhoneNumber, string Comments, string AdditionalField1, string AdditionalField2)
         {
             this.Name = Name;
             this.ContactType = ContactType;
