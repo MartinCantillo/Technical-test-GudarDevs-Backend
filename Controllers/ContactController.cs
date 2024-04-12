@@ -5,7 +5,7 @@ using RepositoriesIContact.IContact;
 
 namespace ControllersContactController.ContactController
 {
-    [Authorize]
+    // [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class CContactController : ControllerBase
@@ -19,8 +19,8 @@ namespace ControllersContactController.ContactController
         [HttpPost("/SaveContact")]
         public IActionResult SaveContact(Contact contact)
         {
-            if (contact.ContactType == 0 || contact.Comments == "" || contact.AdditionalField == 0
-            || contact.Name == "")
+            if (contact.ContactType == 0 || contact.Comments == "" || contact.AdditionalField1 == ""
+            || contact.Name == "" || contact.AdditionalField2 == "" || contact.PhoneNumber == "")
             {
                 return BadRequest("Please check the values ");
             }
@@ -72,11 +72,12 @@ namespace ControllersContactController.ContactController
         [HttpGet("GetAllContact")]
         public ActionResult<Contact> GetAllContact()
         {
+            Console.WriteLine("entro");
             return Ok(this._IContact.GetAll());
         }
 
         [HttpGet("GetbyIdContact")]
-        public async Task<ActionResult<Contact>> GetbyIdContact(int id)
+        public ActionResult<Contact> GetbyIdContact(int id)
         {
             if (id == 0)
             {
@@ -103,38 +104,34 @@ namespace ControllersContactController.ContactController
             }
         }
         [HttpPut("/UpdateContact/{id}")]
-        public IActionResult UpdateContact(int id, Contact contact)
+public IActionResult UpdateContact(int id, Contact contact)
+{
+    if (id == 0 || contact.ContactType == 0 || contact.Comments == "" || contact.AdditionalField1 == "" || contact.AdditionalField2 == "" || contact.Name == "")
+    {
+        return BadRequest("Please check the values");
+    }
+    else
+    {
+        try
         {
-            if (id == 0 || contact.ContactType == 0 || contact.Comments == "" || contact.AdditionalField == 0 || contact.Name == "")
+            var found = this._IContact.GetById(id);
+            if (found == null)
             {
-                return BadRequest("Please check  the values");
+                return NotFound();
             }
             else
             {
-
-
-                try
-                {
-                    var found = this._IContact.GetById(id);
-                    if (found == null)
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-
-
-                        this._IContact.Update(id, contact);
-                        return Ok("Contact was updated satisfactorily");
-                    }
-                }
-                catch (System.Exception)
-                {
-
-                    return BadRequest("Server error");
-                }
+                this._IContact.Update(id, contact);
+                return Ok("Contact was updated satisfactorily");
             }
         }
+        catch (System.Exception)
+        {
+            return BadRequest("Server error");
+        }
+    }
+}
+
 
 
     }

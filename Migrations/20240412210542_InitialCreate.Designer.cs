@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Technical_test_Backend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240412012429_InitialCreate")]
+    [Migration("20240412210542_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -21,48 +21,19 @@ namespace Technical_test_Backend.Migrations
                 .HasAnnotation("ProductVersion", "8.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("ModelsAdditionalField.AdditionalField.AdditionalField", b =>
-                {
-                    b.Property<int>("Id_AdditionalField")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("FieldName")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("FieldType")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id_AdditionalField");
-
-                    b.ToTable("AdditionalFields");
-                });
-
-            modelBuilder.Entity("ModelsContactType.ContactTyp.ContactType", b =>
-                {
-                    b.Property<int>("Id_ContactType")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("TypeName")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id_ContactType");
-
-                    b.ToTable("ContactTypes");
-                });
-
             modelBuilder.Entity("ModelsContacts.Contacs.Contact", b =>
                 {
                     b.Property<int>("Id_Contact")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("AdditionalField")
-                        .HasColumnType("int");
+                    b.Property<string>("AdditionalField1")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("AdditionalField2")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Comments")
                         .IsRequired()

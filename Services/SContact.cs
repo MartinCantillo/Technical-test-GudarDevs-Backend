@@ -58,8 +58,8 @@ namespace ServicesSContact.SContact
 
         public async Task Save(Contact contact)
         {
-            if (contact.ContactType == 0 || contact.Comments == "" || contact.AdditionalField == 0
-            || contact.Name == "")
+            if (contact.ContactType == 0 || contact.Comments == "" || contact.AdditionalField1 == ""
+            || contact.Name == "" || contact.AdditionalField2 == "" || contact.PhoneNumber == "")
             {
                 throw new Exception("Please check the data ");
             }
@@ -70,10 +70,10 @@ namespace ServicesSContact.SContact
                     await this.DbContext.Contacts.AddAsync(contact);
                     this.DbContext.SaveChanges();
                 }
-                catch (System.Exception)
+                catch (System.Exception e)
                 {
 
-                    throw;
+                    throw new Exception(e.Message);
                 }
             }
 
@@ -95,7 +95,9 @@ namespace ServicesSContact.SContact
                 else
                 {
                     CFound.Name = contact.Name;
-                    CFound.AdditionalField = contact.AdditionalField;
+                    CFound.AdditionalField1 = contact.AdditionalField1;
+                    CFound.AdditionalField2 = contact.AdditionalField2;
+                    CFound.PhoneNumber = contact.PhoneNumber;
                     CFound.ContactType = contact.ContactType;
                     CFound.Comments = contact.Comments;
                     //Save the changes 

@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using ModelsAdditionalField.AdditionalField;
-using ModelsContactType.ContactTyp;
+
+
 
 namespace ModelsContacts.Contacs
 {
@@ -10,42 +10,40 @@ namespace ModelsContacts.Contacs
     {
 
         [Key]
-
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id_Contact { get; set; }
 
         [Required]
         public string Name { get; set; }
 
-
-        // Foreign key properties
-        [ForeignKey("Id_ContactType ")]
+        [Required]
         public int ContactType { get; set; }
 
-        [ForeignKey("Id_AdditionalField ")]
-        public int AdditionalField { get; set; }
 
 
         [Required]
         public string PhoneNumber { get; set; }
 
         public string Comments { get; set; }
+        [Required]
+        public string AdditionalField1 { get; set; }
 
+        [Required]
+        public string AdditionalField2 { get; set; }
 
         // Constructor for the Contact class
         public Contact()
         {
 
         }
-        public Contact(string Name, int ContactType, string PhoneNumber, string Comments,int AdditionalField)
-        {
 
+        public Contact(string Name, int ContactType, string PhoneNumber, string Comments, string AdditionalField1, string AdditionalField2)
+        {
             this.Name = Name;
             this.ContactType = ContactType;
             this.PhoneNumber = PhoneNumber;
             this.Comments = Comments;
-            this.AdditionalField = AdditionalField;
-
+            this.AdditionalField1 = AdditionalField1;
+            this.AdditionalField2 = AdditionalField2;
         }
     }
 }
