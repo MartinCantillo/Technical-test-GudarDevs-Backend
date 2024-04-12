@@ -6,7 +6,7 @@ namespace ControllersCAuthenticate.CAuthenticate
 {
     [ApiController]
     [Route("[controller]")]
-    public class CAuthenticateController  : ControllerBase
+    public class CAuthenticateController : ControllerBase
     {
         private readonly IAuthenticate _authenticationUser;
         private readonly User _IUser;

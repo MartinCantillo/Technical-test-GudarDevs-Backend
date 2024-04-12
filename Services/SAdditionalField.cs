@@ -14,7 +14,7 @@ namespace ServicesSAdditionalField.SAdditionalField
             this.DbContext = DbContext;
         }
 
-        public async Task Delete(int additionalField)
+        public void Delete(int additionalField)
         {
             if (additionalField == 0)
             {
@@ -22,13 +22,17 @@ namespace ServicesSAdditionalField.SAdditionalField
             }
             else
             {
-                var _additionalField = await GetById(additionalField);
+                var _additionalField = GetById(additionalField);
                 try
                 {
                     if (_additionalField != null)
                     {
                         this.DbContext.AdditionalFields.Remove(_additionalField);
                         this.DbContext.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new Exception("Not Found");
                     }
 
                 }
@@ -42,9 +46,18 @@ namespace ServicesSAdditionalField.SAdditionalField
 
         public ICollection<AdditionalField> GetAll() => this.DbContext.AdditionalFields.ToList();
 
-        public async Task<AdditionalField> GetById(int additionalField)
+        public AdditionalField GetById(int additionalField)
         {
-            return await this.DbContext.AdditionalFields.FirstOrDefaultAsync(p => p.Id_AdditionalField == additionalField);
+            if (additionalField == 0 || additionalField < 0)
+            {
+                throw new Exception("Please check ");
+            }
+            else
+            {
+                Console.WriteLine("paso");
+
+                return this.DbContext.AdditionalFields.FirstOrDefault(p => p.Id_AdditionalField == additionalField);
+            }
         }
 
         public async Task Save(AdditionalField additionalField)
@@ -68,7 +81,7 @@ namespace ServicesSAdditionalField.SAdditionalField
             }
         }
 
-        public async Task<AdditionalField> Update(int id, AdditionalField additionalField)
+        public AdditionalField Update(int id, AdditionalField additionalField)
         {
             if (id == 0)
             {
@@ -76,7 +89,7 @@ namespace ServicesSAdditionalField.SAdditionalField
             }
             else
             {
-                var AFound = await GetById(id);
+                var AFound = GetById(id);
                 if (AFound == null)
                 {
                     throw new Exception("AdditionalField not found");
@@ -86,8 +99,17 @@ namespace ServicesSAdditionalField.SAdditionalField
                     //Update the values
                     AFound.FieldName = additionalField.FieldName;
                     AFound.FieldType = additionalField.FieldType;
-                    //Save the changes 
-                    await this.DbContext.SaveChangesAsync();
+                    try
+                    {
+                        //Save the changes 
+                        this.DbContext.SaveChanges();
+                    }
+                    catch (System.Exception e)
+                    {
+
+                        throw new Exception(e.Message);
+                    }
+
                     return AFound;
                 }
             }

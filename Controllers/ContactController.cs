@@ -8,11 +8,11 @@ namespace ControllersContactController.ContactController
     [Authorize]
     [ApiController]
     [Route("[controller]")]
-    public class ContactController : ControllerBase
+    public class CContactController : ControllerBase
     {
         public readonly IContact _IContact;
 
-        public ContactController(IContact _IContact)
+        public CContactController(IContact _IContact)
         {
             this._IContact = _IContact;
         }
@@ -87,9 +87,9 @@ namespace ControllersContactController.ContactController
                         return found;
                     }
                 }
-                catch (System.Exception)
+                catch (System.Exception e)
                 {
-                    throw;
+                    return BadRequest(e.Message);
                 }
             }
         }
@@ -98,7 +98,7 @@ namespace ControllersContactController.ContactController
         {
             if (id == 0 || contact.ContactType == 0 || contact.Comments == "" || contact.AdditionalField == 0 || contact.Name == "")
             {
-                return BadRequest("Please check the id and the values");
+                return BadRequest("Please check  the values");
             }
             else
             {
