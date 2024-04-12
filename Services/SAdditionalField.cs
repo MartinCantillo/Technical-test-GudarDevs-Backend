@@ -79,7 +79,7 @@ namespace ServicesSAdditionalField.SAdditionalField
                 var AFound = await GetById(id);
                 if (AFound == null)
                 {
-                    throw new Exception("User not found");
+                    throw new Exception("AdditionalField not found");
                 }
                 else
                 {
