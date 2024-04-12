@@ -5,7 +5,7 @@ using RepositoriesIContact.IContact;
 
 namespace ControllersContactController.ContactController
 {
-    [Authorize]
+    //[Authorize]
     [ApiController]
     [Route("[controller]")]
     public class CContactController : ControllerBase
@@ -50,8 +50,17 @@ namespace ControllersContactController.ContactController
             {
                 try
                 {
-                    this._IContact.Delete(id);
-                    return Ok("Contact was deleted satisfactorily");
+                    var found = this._IContact.GetById(id);
+                    if (found == null)
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+
+                        this._IContact.Delete(id);
+                        return Ok("Contact was deleted satisfactorily");
+                    }
                 }
                 catch (System.Exception)
                 {
@@ -77,7 +86,7 @@ namespace ControllersContactController.ContactController
             {
                 try
                 {
-                    var found = await this._IContact.GetById(id);
+                    var found = this._IContact.GetById(id);
                     if (found == null)
                     {
                         return NotFound("Contact Not Found");
@@ -102,10 +111,22 @@ namespace ControllersContactController.ContactController
             }
             else
             {
+
+
                 try
                 {
-                    this._IContact.Update(id, contact);
-                    return Ok("Contact was updated satisfactorily");
+                    var found = this._IContact.GetById(id);
+                    if (found == null)
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+
+
+                        this._IContact.Update(id, contact);
+                        return Ok("Contact was updated satisfactorily");
+                    }
                 }
                 catch (System.Exception)
                 {

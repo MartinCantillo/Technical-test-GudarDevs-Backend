@@ -13,7 +13,7 @@ namespace ServicesSContact.SContact
         {
             this.DbContext = DbContext;
         }
-        public async Task Delete(int contact)
+        public void Delete(int contact)
         {
             if (contact == 0)
             {
@@ -21,7 +21,7 @@ namespace ServicesSContact.SContact
             }
             else
             {
-                var _contact = await GetById(contact);
+                var _contact = GetById(contact);
                 try
                 {
                     if (_contact != null)
@@ -42,9 +42,18 @@ namespace ServicesSContact.SContact
         public ICollection<Contact> GetAll() => this.DbContext.Contacts.ToList();
 
 
-        public async Task<Contact> GetById(int contact)
+        public Contact GetById(int contact)
         {
-            return await this.DbContext.Contacts.FirstOrDefaultAsync(p => p.Id_Contact == contact);
+            if (contact < 0 || contact == 0)
+            {
+                throw new Exception("PLease check");
+            }
+            else
+            {
+
+
+                return this.DbContext.Contacts.FirstOrDefault(p => p.Id_Contact == contact);
+            }
         }
 
         public async Task Save(Contact contact)
@@ -70,7 +79,7 @@ namespace ServicesSContact.SContact
 
         }
 
-        public async Task<Contact> Update(int Idcontact, Contact contact)
+        public Contact Update(int Idcontact, Contact contact)
         {
             if (Idcontact == 0)
             {
@@ -78,7 +87,7 @@ namespace ServicesSContact.SContact
             }
             else
             {
-                var CFound = await GetById(Idcontact);
+                var CFound = GetById(Idcontact);
                 if (CFound == null)
                 {
                     throw new Exception("contact not found");
@@ -90,7 +99,7 @@ namespace ServicesSContact.SContact
                     CFound.ContactType = contact.ContactType;
                     CFound.Comments = contact.Comments;
                     //Save the changes 
-                    await this.DbContext.SaveChangesAsync();
+                    this.DbContext.SaveChanges();
                     return CFound;
                 }
             }

@@ -107,7 +107,7 @@ namespace ControllersCAdditionalField.CAdditionalField
                 }
             }
         }
-         [HttpDelete("Delete")]
+        [HttpDelete("Delete")]
         public IActionResult Delete(int id)
         {
             if (id == 0 || id == null)
