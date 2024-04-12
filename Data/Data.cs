@@ -16,7 +16,7 @@ namespace DataDataContext.DataContext
         public DbSet<ContactType> ContactTypes { get; set; }
         public DbSet<Contact> Contacts { set; get; }
         public DbSet<AdditionalField> AdditionalFields { set; get; }
-          public DbSet<User> Users { set; get; }
+        public DbSet<User> Users { set; get; }
 
 
 
