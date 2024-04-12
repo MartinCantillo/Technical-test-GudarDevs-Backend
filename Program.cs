@@ -1,5 +1,7 @@
 using System.Text;
+using DataDataContext.DataContext;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using RepositoriesIAdditionalField.IAdditionalField;
 using RepositoriesIAuthenticate.IAuthenticate;
@@ -61,6 +63,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//config database 
+builder.Services.AddDbContext<DataContext>(options =>
+{
+    options.UseMySQL("server=localhost;port=3306;database=bdtest;user=root");
+});
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -71,6 +80,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseAuthentication();
 
 app.UseAuthorization();
 
