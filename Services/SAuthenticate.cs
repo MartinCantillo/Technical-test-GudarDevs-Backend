@@ -59,7 +59,7 @@ namespace ServicesSAuthenticate.SAuthenticate
 
                 Issuer = "backend",
 
-                Expires = DateTime.UtcNow.AddMinutes(3),
+                Expires = DateTime.UtcNow.AddMinutes(20),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(keyBytes), SecurityAlgorithms.HmacSha256Signature)
             };
 

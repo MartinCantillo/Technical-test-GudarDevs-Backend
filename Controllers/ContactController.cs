@@ -5,7 +5,7 @@ using RepositoriesIContact.IContact;
 
 namespace ControllersContactController.ContactController
 {
-    // [Authorize]
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class CContactController : ControllerBase
@@ -16,9 +16,13 @@ namespace ControllersContactController.ContactController
         {
             this._IContact = _IContact;
         }
+
+
+
         [HttpPost("/SaveContact")]
-        public IActionResult SaveContact(Contact contact)
+         public IActionResult SaveContact(Contact contact)
         {
+            
             if (contact.ContactType == "" || contact.Comments == "" || contact.AdditionalField1 == ""
             || contact.Name == "" || contact.AdditionalField2 == "" || contact.PhoneNumber == "")
             {
@@ -39,7 +43,7 @@ namespace ControllersContactController.ContactController
             }
         }
 
-        [HttpDelete("DeleteContact")]
+        [HttpDelete("DeleteContact/{id}")]
         public IActionResult DeleteContact(int id)
         {
             if (id == 0)

@@ -17,18 +17,20 @@ namespace ControllersCAuthenticate.CAuthenticate
         }
 
         [HttpPost("/userValidate")]
-        public IActionResult Validate(string user, string password)
+        public IActionResult Validate(User user)
         {
+           
             try
             {
-                if (user == "" || password == "")
+                if (user.Username == "" || user.Password == "")
                 {
+                   
                     return BadRequest("Please enter the data");
                 }
                 else
                 {
 
-                    var UserValidated = this._authenticationUser.ValidateUser(user, password);
+                    var UserValidated = this._authenticationUser.ValidateUser(user.Username , user.Password );
                     if (UserValidated == null)
                     {
                         throw new Exception("User Not found");
